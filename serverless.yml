@@ -1,0 +1,26 @@
+service: ${service_name}
+
+provider:
+  name: AWS
+  endpointType: REGIONAL
+  region: eu-west-1
+  runtime: nodejs12.x
+  timeout: 30
+  memorySize: 1536
+  tracing:
+    apiGateway: true
+    lambda: true
+functions:
+  graphql:
+    handler: src/index.server
+    events:
+      - http:
+          path: /
+          method: post
+          cors:
+            origin: '*'
+      - http:
+          path: /
+          method: get
+          cors: true
+    timeout: 30

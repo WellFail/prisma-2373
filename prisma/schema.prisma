@@ -1,0 +1,91 @@
+generator photon {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
+}
+
+datasource db {
+  url      = env("PRISMA_POSTGRES_URL")
+  provider = "postgres"
+}
+
+model Post {
+  author      User?            @relation(fields: [authorId], references: [id])
+  authorId String? @map("author")
+  content     String?      
+  createdAt   DateTime   @default(now())  
+  id          String     @id @default(cuid())  
+  published   Boolean      
+  title       String       
+  updatedAt   DateTime   @updatedAt  
+}
+
+model Test1 {
+  createdAt      DateTime               @default(now())  
+  id             String                 @id @default(cuid())  
+  testOnetoOne   Test2?     
+  updatedAt      DateTime               @updatedAt  
+}
+
+model Test2 {
+  createdAt   DateTime   @default(now())  
+  id          String     @id @default(cuid())  
+  test1       Test1?            @relation(fields: [test1Id], references: [id])
+  test1Id String? @map("test1")
+  updatedAt   DateTime   @updatedAt  
+}
+
+model Test3 {
+  createdAt       DateTime                 @default(now())  
+  id              String                   @id @default(cuid())  
+  testManyToOne   Test4?     @relation(fields: [testManyToOneId], references: [id])
+  testManyToOneId String? @map("testManyToOne")
+  updatedAt       DateTime                 @updatedAt  
+}
+
+model Test4 {
+  createdAt   DateTime   @default(now())  
+  id          String     @id @default(cuid())  
+  test3s      Test3[]           
+  updatedAt   DateTime   @updatedAt  
+}
+
+model Test5 {
+  createdAt          DateTime                     @default(now())  
+  id                 String                       @id @default(cuid())  
+  testManyToManies   Test6[]     @relation(name: "testManyToManiesTotest5s", references: [id])
+  updatedAt          DateTime                     @updatedAt  
+}
+
+model Test6 {
+  createdAt   DateTime   @default(now())  
+  id          String     @id @default(cuid())  
+  test5s      Test5[]           @relation(name: "testManyToManiesTotest5s", references: [id])
+  updatedAt   DateTime   @updatedAt  
+}
+
+model User {
+  createdAt   DateTime        @default(now())  
+  email       String          @unique  
+  id          String          @id @default(cuid())  
+  name        String?           
+  posts       Post[]     
+  role        Role              
+  updatedAt   DateTime        @updatedAt  
+}
+
+model ijijij {
+  createdAt   DateTime   @default(now())  
+  id          String     @id @default(cuid())  
+  updatedAt   DateTime   @updatedAt  
+}
+
+model jijijijijij {
+  createdAt   DateTime   @default(now())  
+  id          String     @id @default(cuid())  
+  updatedAt   DateTime   @updatedAt  
+}
+
+enum Role {
+  ADMIN
+  AUTHOR
+}
