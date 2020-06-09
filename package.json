@@ -14,7 +14,7 @@
     "@prisma/cli": "2.0.0-beta.4",
     "apollo-server-lambda": "2.14.2",
     "graphql": "15.0.0",
-    "graphql-playground-html": "1.6.19",
+    "graphql-playground-html": "1.6.22",
     "jsonwebtoken": "8.5.1",
     "@nexus/schema": "0.13.1",
     "nexus-prisma": "0.12.0",
