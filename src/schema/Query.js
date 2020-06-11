@@ -7,6 +7,37 @@ const { objectType, arg, idArg } = require('@nexus/schema');
   exports.default = objectType({
     name: 'Query',
     definition(t) {
+
+      t.field('dmmf', {
+        type: 'DMMF',
+        args: { id: idArg() },
+        resolve: async () => {
+          let dmmf = process.env.DMMF;
+          let dmmfId = process.env.DMMF_ID;
+          if (!process.env.DMMF) {
+            await photon.connect();
+            //@ts-ignore
+            process.env.ENGINE_PORT = photon.fetcher.prisma.engine.port;
+            
+            dmmf = await new Promise((resolve, reject) => {
+              http.get('http://localhost:'+ process.env.ENGINE_PORT + '/dmmf', (resp) => {
+                let data = '';
+                resp.on('data', (chunk) => { data += chunk; });
+                resp.on('end', () => { resolve(data) });
+              }).on("error", (err) => { reject(err) });
+            })
+            await photon.disconnect();
+
+            process.env.DMMF = dmmf;
+            dmmfId = uuid();
+            process.env.DMMF_ID = dmmfId;
+          }
+          return {
+            id: dmmfId,
+            dmmf,
+          }
+        },
+      });
   
     t.crud.post({ alias: 'findOnePost' });
     t.crud.posts({ filtering: true , ordering: true, pagination: true, alias: 'findManyPost' });

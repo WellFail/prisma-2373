@@ -1,7 +1,11 @@
-service: ${service_name}
+service: test-prisma2373
 
+
+plugins:
+  - serverless-offline
+  
 provider:
-  name: AWS
+  name: aws
   endpointType: REGIONAL
   region: eu-west-1
   runtime: nodejs12.x
