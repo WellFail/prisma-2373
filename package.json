@@ -13,18 +13,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "2.0.0",
+    "@prisma/client": "2.5.1",
     "apollo-server-lambda": "2.14.3",
     "graphql": "15.1.0",
     "graphql-playground-html": "1.6.25",
     "jsonwebtoken": "8.5.1",
-    "@nexus/schema": "0.14.0",
-    "nexus-prisma": "0.14.0",
+    "@nexus/schema": "0.15.0",
+    "nexus-plugin-prisma": "0.17.0",
     "request": "2.88.2",
     "request-promise": "4.2.5"
   },
   "devDependencies": {
-    "@prisma/cli": "2.0.0",
+    "@prisma/cli": "2.5.1",
     "serverless-offline": "^6.4.0"
   }
 }

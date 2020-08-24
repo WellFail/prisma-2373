@@ -15,9 +15,9 @@ const { objectType, arg, idArg } = require('@nexus/schema');
           let dmmf = process.env.DMMF;
           let dmmfId = process.env.DMMF_ID;
           if (!process.env.DMMF) {
-            await photon.connect();
+            await photon.$connect();
             //@ts-ignore
-            process.env.ENGINE_PORT = photon.fetcher.prisma.engine.port;
+            process.env.ENGINE_PORT = photon._fetcher.prisma._engine.port;
             
             dmmf = await new Promise((resolve, reject) => {
               http.get('http://localhost:'+ process.env.ENGINE_PORT + '/dmmf', (resp) => {
@@ -26,7 +26,7 @@ const { objectType, arg, idArg } = require('@nexus/schema');
                 resp.on('end', () => { resolve(data) });
               }).on("error", (err) => { reject(err) });
             })
-            await photon.disconnect();
+            await photon.$disconnect();
 
             process.env.DMMF = dmmf;
             dmmfId = uuid();

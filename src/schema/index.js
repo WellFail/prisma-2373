@@ -1,5 +1,5 @@
 
-const { nexusPrismaPlugin } = require('nexus-prisma');
+const { nexusSchemaPrisma } = require('nexus-plugin-prisma/schema');
 const { makeSchema, objectType } = require('@nexus/schema');
 
 const Query = require('./Query').default;
@@ -27,7 +27,7 @@ const DMMF = objectType({
 exports.default = makeSchema({
   types: [Post, Test1, Test2, Test3, Test4, Test5, Test6, User, Ijijij, Jijijijijij, Query, Mutation, DMMF],
   outputs: {},
-  plugins: [nexusPrismaPlugin({shouldGenerateArtifacts: false})],
+  plugins: [nexusSchemaPrisma({experimentalCRUD: true,shouldGenerateArtifacts: false})],
   typegenAutoConfig: {
     sources: [
       {
