@@ -17,7 +17,7 @@
     "apollo-server-lambda": "2.14.3",
     "graphql": "15.1.0",
     "graphql-playground-html": "1.6.25",
-    "jsonwebtoken": "8.5.1",
+    "jsonwebtoken": "9.0.0",
     "@nexus/schema": "0.15.0",
     "nexus-plugin-prisma": "0.17.0",
     "request": "2.88.2",
