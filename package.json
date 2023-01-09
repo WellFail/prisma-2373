@@ -25,6 +25,6 @@
   },
   "devDependencies": {
     "@prisma/cli": "2.5.1",
-    "serverless-offline": "^6.4.0"
+    "serverless-offline": "^12.0.4"
   }
 }
